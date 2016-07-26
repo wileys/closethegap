@@ -11,30 +11,50 @@ BLUE = (0, 0, 255)
 GREY = (127, 127, 127)
 YELLOW = (255, 255, 0)
 
+
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
+
+
+start_position = (600 - SCREEN_HEIGHT, 0)
 
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
 pygame.display.set_caption("CLOSE THE GAP")
 
-bgimg = pygame.image.load("images\pixelpaper.jpg").convert()
+
+bgimg = pygame.image.load("images/pixelpaper.jpg").convert()
 bgimg = pygame.transform.scale(bgimg, (800, 600))
 
-class player():
-    def __init__ (self, width, height):
+
+class Player():
+    def __init__ (self, width, height, x_position, y_position):
         self.width = width
         self.height = height
+        self.x_position = x_position
+        self.y_position = y_position
 
-        def jump(self):
-            y_position += 2
-            x_position += 1
+    
+    def drawSprite(self):
+        sprite = pygame.image.load("images/running.png")
+        sprite = pygame.transform.scale(sprite, (self.width, self.height))
+        sprite.convert_alpha()
+        bgimg.blit(sprite, (self.x_position, self.y_position))
+       # pygame.draw.rect(screen, self.color, [0, 0, self.width, self.height])
 
-        def moveRight(self):
-            x_position += 2
+    def jump(self):
+        y_position += 2
+        x_position += 1
 
-        def moveLeft(self):
-            x_position -= 2
+    def moveRight(self):
+        x_position += 2
+
+    def moveLeft(self):
+        x_position -= 2
+
+    
+
+
 
 class Coin():
     def __init__ (self, color, x_position, y_position):
@@ -59,8 +79,10 @@ while not done:
 
     screen.blit(bgimg, [0, 0])
 
-    coin = Coin(YELLOW, 50, 100)
-    coin.createCoin()
+    player = Player(120, 120, 0, SCREEN_HEIGHT - 120)
+    player.drawSprite()
+
+
 
     pygame.display.flip()
 
