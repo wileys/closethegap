@@ -13,16 +13,20 @@ YELLOW = (255, 255, 0)
 GOLD = (255, 215, 0)
 GREY = (105, 105, 105)
 
+
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
+
+
+start_position = (600 - SCREEN_HEIGHT, 0)
 
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
 pygame.display.set_caption("CLOSE THE GAP")
 
-bgimg = pygame.image.load("images\pixelpaper.jpg").convert()
-bgimg = pygame.transform.scale(bgimg, (800, 600))
 
+bgimg = pygame.image.load("images/pixelpaper.jpg").convert()
+bgimg = pygame.transform.scale(bgimg, (800, 600))
 
 class Platform():
 	def __init__ (self, color, width, height, x_position, y_position):
@@ -36,10 +40,12 @@ class Platform():
 		pygame.draw.rect(screen, self.color, (self.x_position, self.y_position, self.width, self.height), 0)
 
 
-class player():
-    def __init__ (self, width, height):
+class Player():
+    def __init__ (self, width, height, x_position, y_position):
         self.width = width
         self.height = height
+        self.x_position = x_position
+        self.y_position = y_position
 
     def jump(self):
         y_position += 2
@@ -50,6 +56,26 @@ class player():
 
     def moveLeft(self):
         x_position -= 2
+
+
+    def drawSprite(self):
+        sprite = pygame.image.load("images/running.png")
+        sprite = pygame.transform.scale(sprite, (self.width, self.height))
+        sprite.convert_alpha()
+        bgimg.blit(sprite, (self.x_position, self.y_position))
+       # pygame.draw.rect(screen, self.color, [0, 0, self.width, self.height])
+
+    def jump(self):
+        y_position += 2
+        x_position += 1
+
+    def moveRight(self):
+        x_position += 2
+
+    def moveLeft(self):
+        x_position -= 2
+
+    
 
 class Coin():
     def __init__ (self, color, x_position, y_position):
@@ -80,6 +106,7 @@ while not done:
 
 
     screen.blit(bgimg, [0, 0])
+
 
     coin1 = Coin(GOLD, 175, 400)
     coin1.drawCoin()
@@ -112,6 +139,11 @@ while not done:
     # platform2 = platform.drawPlatform()
     # platorm3 = platform.drawPlatform()
     # endplatform = platform.drawPlatform()
+
+
+    player = Player(120, 120, 0, SCREEN_HEIGHT - 120)
+    player.drawSprite()
+
 
     pygame.display.flip()
 
