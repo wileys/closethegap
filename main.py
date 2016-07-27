@@ -1,5 +1,6 @@
 import pygame
 import random
+import time
 
 pygame.init()
 
@@ -25,6 +26,8 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("CLOSE THE GAP")
 
 
+
+
 bgimg = pygame.image.load("images/pixelpaper.jpg").convert()
 bgimg = pygame.transform.scale(bgimg, (800, 600))
 
@@ -40,42 +43,38 @@ class Platform():
 		pygame.draw.rect(screen, self.color, (self.x_position, self.y_position, self.width, self.height), 0)
 
 
+
+def sprite(x_position, y_position):
+    screen.blit(sprite1, (x_position, y_position))
+
+
 class Player():
-    def __init__ (self, width, height, x_position, y_position):
+    def __init__ (self, width, height):
         self.width = width
         self.height = height
-        self.x_position = x_position
-        self.y_position = y_position
+        self.x_position = 0
+        self.y_position = SCREEN_HEIGHT - 220
 
-    def jump(self):
-        y_position += 2
-        x_position += 1
+    
+    def jump(self, y_change):
+        self.y_position += y_change
 
-    def moveRight(self):
-        x_position += 2
+    def moveRight(self, x_change):
+        self.x_position += x_change
 
-    def moveLeft(self):
-        x_position -= 2
+    def moveLeft(self, x_change):
+        self.x_position += x_change
 
 
     def drawSprite(self):
-        sprite = pygame.image.load("images/running.png")
-        sprite = pygame.transform.scale(sprite, (self.width, self.height))
-        sprite.convert_alpha()
-        bgimg.blit(sprite, (self.x_position, self.y_position))
+        sprite1 = pygame.image.load("images/girl.png").convert_alpha()
+        sprite1 = pygame.transform.scale(sprite1, (100, 100))
+        screen.blit(sprite1, (self.x_position, self.y_position))
        # pygame.draw.rect(screen, self.color, [0, 0, self.width, self.height])
 
-    def jump(self):
-        y_position += 2
-        x_position += 1
 
-    def moveRight(self):
-        x_position += 2
 
-    def moveLeft(self):
-        x_position -= 2
 
-    
 
 class Coin():
     def __init__ (self, color, x_position, y_position):
@@ -95,8 +94,12 @@ class Coin():
 
 
 
-
+player = Player(120, 120)
 done = False
+clock = pygame.time.Clock()
+
+x_change = 0
+y_change = 0
 
 while not done:
     # main event loop
@@ -104,9 +107,8 @@ while not done:
         if event.type == pygame.QUIT:
             done = True
 
-
+    # draws backround image
     screen.blit(bgimg, [0, 0])
-
 
     coin1 = Coin(GOLD, 175, 400)
     coin1.drawCoin()
@@ -141,11 +143,28 @@ while not done:
     # endplatform = platform.drawPlatform()
 
 
-    player = Player(120, 120, 0, SCREEN_HEIGHT - 120)
+    #player = Player(120, 120)
+
     player.drawSprite()
 
+    if event.type == pygame.KEYDOWN:
+        if event.key == pygame.K_LEFT:
+            player.moveLeft(-5)
+        elif event.key == pygame.K_RIGHT:
+            player.moveRight(5)
+        elif event.key == pygame.K_UP:
+            player.jump(-5)
 
-    pygame.display.flip()
+    if event.type == pygame.KEYUP:
+        if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
+            player.moveLeft(0)
+        elif event.key == pygame.K_UP:
+            player.jump(0)
+
+   
+
+    pygame.display.update()
+    clock.tick(60)
 
 
 pygame.quit()
