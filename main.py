@@ -31,6 +31,16 @@ pygame.display.set_caption("CLOSE THE GAP")
 bgimg = pygame.image.load("images/pixelpaper.jpg").convert()
 bgimg = pygame.transform.scale(bgimg, (800, 600))
 
+pygame.font.init()
+default_font = pygame.font.get_default_font()
+font_renderer = pygame.font.Font(default_font, 30)
+
+# To create a surface containing `Some Text`
+text = font_renderer.render(
+    "SCORE: ",   # The font to render
+    1,             # With anti aliasing
+    (0,0,0)) # RGB Color
+
 class Platform():
 	def __init__ (self, color, width, height, x_position, y_position):
 		self.color = color
@@ -162,6 +172,9 @@ while not done:
             player.jump(0)
 
    
+    bgimg.blit(
+    text,  # The text to render
+    (10,10))  # Where on the destination surface to render said font
 
     pygame.display.update()
     clock.tick(60)
