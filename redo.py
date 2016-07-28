@@ -1,7 +1,7 @@
 import pygame as pg
 import random
 
-
+score = 0
 
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
@@ -28,14 +28,19 @@ screen = pg.display.set_mode((WIDTH, HEIGHT))
 
 TITLE = "CLOSE THE GAP"
 
-pg.display.set_caption("CLOSE THE GAP")
-
+pg.display.set_caption("CLOSE THE GAP") 
 
 
 vec = pg.math.Vector2
 
 bgimg = pg.image.load("images/pixelpaper.jpg").convert()
 bgimg = pg.transform.scale(bgimg, (800, 600))
+
+pg.font.init()
+default_font = pg.font.get_default_font()
+font_renderer = pg.font.Font(default_font, 30)
+
+# To create a surface containing `Some Text`
 
 
 class Game:
@@ -47,6 +52,7 @@ class Game:
         pg.display.set_caption(TITLE)
         self.clock = pg.time.Clock()
         self.running = True
+        self.score = 0
 
     def new(self):
         # start a new game
@@ -66,6 +72,13 @@ class Game:
         self.platforms.add(p4)
         self.all_sprites.add(p5)
         self.platforms.add(p5)
+        self.coins = pg.sprite.Group()
+        c1 = Coin(380,270)
+        c2 = Coin(445, 270)
+        self.all_sprites.add(c1)
+        self.coins.add(c1)
+        self.all_sprites.add(c2)
+        self.coins.add(c2)
         self.run()
 
     def run(self):
@@ -77,6 +90,7 @@ class Game:
             self.update()
             self.draw()
 
+
     def update(self):
         # Game Loop - Update
         self.all_sprites.update()
@@ -85,6 +99,13 @@ class Game:
             if hits:
                 self.player.pos.y = hits[0].rect.top
                 self.player.vel.y = 0
+            hits2 = pg.sprite.spritecollide(self.player, self.coins, True)
+            if hits2:
+                print("BLEH")
+                self.score += 10
+
+
+
 
 
         
@@ -105,6 +126,14 @@ class Game:
         # Game Loop - draw
         screen.blit(bgimg, [0,0])
         self.all_sprites.draw(self.screen)
+        text = font_renderer.render(
+            "SCORE: "+ str(self.score),   # The font to render
+            1,             # With anti aliasing
+            (0,0,0)) # RGB Color
+
+        bgimg.blit(
+            text,  # The text to render
+            (10,10))  # Where on the destination surface to render said font
         # *after* drawing everything, flip the display
         pg.display.flip()
 
@@ -168,11 +197,28 @@ class Platform(pg.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
 
+class Coin(pg.sprite.Sprite):
+    def __init__(self, x, y):
+        pg.sprite.Sprite.__init__(self)
+        self.image = pg.Surface((24, 24))
+        pg.draw.circle(self.image, YELLOW, (12,12), 12, 0)
+        self.image.set_colorkey((0,0,0))
+        print ("Circle")
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+
 g = Game()
-g.show_start_screen()
+# g.show_start_screen()
+
+    
+
 
 while g.running:  
     g.new()
-    g.show_go_screen()
+    # g.show_go_screen()
+    
+
+
 
 pg.quit()
