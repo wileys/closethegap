@@ -19,7 +19,7 @@ FPS = 60
 PLAYER_ACC = 0.5
 PLAYER_FRICTION = -0.12
 PLAYER_GRAV = 0.8
-
+PLAYER_JUMP = 16
 
 WIDTH = 800
 HEIGHT = 600
@@ -85,6 +85,12 @@ class Game:
             if hits:
                 self.player.pos.y = hits[0].rect.top
                 self.player.vel.y = 0
+        #game over
+        if self.player.rect.bottom > HEIGHT:
+            self.playing = False 
+            pg.time.delay(100)
+
+            
 
 
         
@@ -138,7 +144,8 @@ class Player(pg.sprite.Sprite):
         hits = pg.sprite.spritecollide(self, self.game.platforms, False)
         self.rect.x -= 1
         if hits:
-            self.vel.y = -16
+            self.vel.y = -PLAYER_JUMP
+
 
 
 
@@ -163,7 +170,7 @@ class Platform(pg.sprite.Sprite):
     def __init__(self, x, y, w, h):
         pg.sprite.Sprite.__init__(self)
         self.image = pg.Surface((w, h))
-        self.image.fill(GREEN)
+        self.image.fill(GREY)
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
