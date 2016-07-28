@@ -18,6 +18,7 @@ FPS = 60
 # Player properties
 PLAYER_ACC = 0.5
 PLAYER_FRICTION = -0.12
+PLAYER_GRAV = 0.8
 
 
 WIDTH = 800
@@ -31,6 +32,7 @@ pg.display.set_caption("CLOSE THE GAP")
 
 
 
+vec = pg.math.Vector2
 
 bgimg = pg.image.load("images/pixelpaper.jpg").convert()
 bgimg = pg.transform.scale(bgimg, (800, 600))
@@ -50,14 +52,20 @@ class Game:
         # start a new game
         self.all_sprites = pg.sprite.Group()
         self.platforms = pg.sprite.Group()
-        self.player = Player()
+        self.player = Player(self)
         self.all_sprites.add(self.player)
-        p1 = Platform(0, HEIGHT - 40, WIDTH, 40)
-        self.all_sprites.add(p1)
-        self.platforms.add(p1)
-        p2 = Platform(WIDTH / 2 - 50, HEIGHT * 3 / 4, 100, 20)
+        p2 = Platform(370, 300, 150, 20)
+        p3 = Platform(595, 425, 150, 20)
+        p4 = Platform(145, 425, 150, 20)
+        p5 = Platform(0, 500, 50, 100)
         self.all_sprites.add(p2)
         self.platforms.add(p2)
+        self.all_sprites.add(p3)
+        self.platforms.add(p3)
+        self.all_sprites.add(p4)
+        self.platforms.add(p4)
+        self.all_sprites.add(p5)
+        self.platforms.add(p5)
         self.run()
 
     def run(self):
@@ -72,10 +80,14 @@ class Game:
     def update(self):
         # Game Loop - Update
         self.all_sprites.update()
-        hits = pg.sprite.spritecollide(self.player, self.platforms, False)
-        if hits:
-            self.player.pos.y = hits[0].rect.top
-            self.player.vel.y = 0
+        if self.player.vel.y > 0:
+            hits = pg.sprite.spritecollide(self.player, self.platforms, False)
+            if hits:
+                self.player.pos.y = hits[0].rect.top
+                self.player.vel.y = 0
+
+
+        
 
     def events(self):
         # Game Loop - events
@@ -85,6 +97,9 @@ class Game:
                 if self.playing:
                     self.playing = False
                 self.running = False
+            if event.type == pg.KEYDOWN:
+                if event.key == pg.K_UP:
+                    self.player.jump()
 
     def draw(self):
         # Game Loop - draw
@@ -102,23 +117,34 @@ class Game:
         pass
 
 
-vec = pg.math.Vector2
 
 class Player(pg.sprite.Sprite):
-    def __init__(self):
+    def __init__(self, game):
         pg.sprite.Sprite.__init__(self)
-        self.image = pg.Surface((100, 100))
+        self.game = game
+        self.image = pg.Surface((70, 70))
         sprite = pg.image.load("images/girl.png").convert_alpha()
-        sprite = pg.transform.scale(sprite, (100, 100))
+        sprite = pg.transform.scale(sprite, (70, 70))
+        self.image.set_colorkey((0,0,0))
         self.image.blit(sprite, (0, 0))
         self.rect = self.image.get_rect()
         self.rect.center = (WIDTH / 2, HEIGHT / 2)
-        self.pos = vec(WIDTH / 2, HEIGHT / 2)
+        self.pos = vec(30, 420)
         self.vel = vec(0, 0)
         self.acc = vec(0, 0)
 
+    def jump(self):
+        self.rect.x += 1
+        hits = pg.sprite.spritecollide(self, self.game.platforms, False)
+        self.rect.x -= 1
+        if hits:
+            self.vel.y = -16
+
+
+
+
     def update(self):
-        self.acc = vec(0, 0.5)
+        self.acc = vec(0, PLAYER_GRAV)
         keys = pg.key.get_pressed()
         if keys[pg.K_LEFT]:
             self.acc.x = -PLAYER_ACC
@@ -131,11 +157,6 @@ class Player(pg.sprite.Sprite):
         self.vel += self.acc
         self.pos += self.vel + 0.5 * self.acc
         # wrap around the sides of the screen
-        if self.pos.x > WIDTH:
-            self.pos.x = 0
-        if self.pos.x < 0:
-            self.pos.x = WIDTH
-
         self.rect.midbottom = self.pos
 
 class Platform(pg.sprite.Sprite):
@@ -149,6 +170,7 @@ class Platform(pg.sprite.Sprite):
 
 g = Game()
 g.show_start_screen()
+
 while g.running:  
     g.new()
     g.show_go_screen()
