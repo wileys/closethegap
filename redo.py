@@ -30,7 +30,7 @@ TITLE = "CLOSE THE GAP"
 
 pg.display.set_caption("CLOSE THE GAP") 
 
-
+FONT_NAME = 'arial'
 vec = pg.math.Vector2
 
 bgimg = pg.image.load("images/pixelpaper.jpg").convert()
@@ -52,6 +52,7 @@ class Game:
         pg.display.set_caption(TITLE)
         self.clock = pg.time.Clock()
         self.running = True
+        self.font_name = pg.font.match_font(FONT_NAME)
         self.score = 0
 
     def new(self):
@@ -60,6 +61,7 @@ class Game:
         self.platforms = pg.sprite.Group()
         self.player = Player(self)
         self.all_sprites.add(self.player)
+        #white_male_platform = Platform(70, 800, 730, 20)
         p2 = Platform(370, 300, 150, 20)
         p3 = Platform(595, 425, 110, 20)
         p4 = Platform(145, 425, 150, 20)
@@ -79,7 +81,7 @@ class Game:
         c1 = Coin(390,270)
         c2 = Coin(470, 270)
         c3 = Coin(250, 390)
-        c4 = Coin(290, 320)
+        c4 = Coin(280, 330)
         c5 = Coin(170, 390)
         c6 = Coin(600, 390)
         c7 = Coin(680, 390)
@@ -139,9 +141,6 @@ class Game:
 
         
 
-
-        
-
     def events(self):
         # Game Loop - events
         for event in pg.event.get():
@@ -169,14 +168,50 @@ class Game:
         # *after* drawing everything, flip the display
         pg.display.flip()
 
-    def show_start_screen(self):
-        # game splash/start screen
-        pass
+    def draw_text(self, text, size, color, x, y):
+        font = pg.font.Font(self.font_name, size)
+        text_surface = font.render(text, True, color)
+        text_rect = text_surface.get_rect()
+        text_rect.midtop = (x, y)
+        self.screen.blit(text_surface, text_rect)
 
-    def show_go_screen(self):
-        # game over/continue
-        pass
+    def wait_for_key(self):
+        waiting = True
+        while waiting:
+            self.clock.tick(30)
+            for event in pg.event.get():
+                if event.type == pg.QUIT:
+                    waiting = False
+                    self.running = False
+                if event.type == pg.KEYUP:
+                    waiting = False
 
+    def start_screen(self):
+        self.screen.fill(WHITE)
+        self.draw_text(TITLE, 75, BLACK, WIDTH/2, 200)
+        self.draw_text("Press any key to start.", 40 , BLACK, WIDTH/2, 350)
+        pg.display.flip()
+        self.wait_for_key()
+
+    def instructions_screen(self):
+        self.screen.fill(WHITE)
+        self.draw_text("INSTRUCTIONS", 30, BLACK, WIDTH/2, 150)
+        self.draw_text("USE LEFT AND RIGHT ARROW KEYS TO MOVE FORWARD AND BACK. ", 24, BLACK, WIDTH/2, 250)
+        self.draw_text("USE UP ARROW KEY TO JUMP", 24, BLACK, WIDTH/2, 300)
+        self.draw_text("COLLECT ALL OF THE COINS TO MOVE TO THE NEXT LEVEL AND CLOSE THE GAP!", 24, BLACK, WIDTH/2, 350)
+        self.draw_text("Press any key to start.", 24, BLACK, WIDTH/2, 450)
+        pg.display.flip()
+        self.wait_for_key()
+
+    def instructions_screen(self):
+        self.screen.fill(WHITE)
+        self.draw_text("CONGRATULATIONS!", 30, BLACK, WIDTH/2, 150)
+        self.draw_text("You made it past the second level! Asian women are generally paid NINETY percent of what a white male is paid .", 24, BLACK, WIDTH/2, 250)
+        pg.display.flip()
+        self.wait_for_key()
+
+
+    # def go_screen():
 
 
 class Player(pg.sprite.Sprite):
@@ -200,9 +235,6 @@ class Player(pg.sprite.Sprite):
         self.rect.x -= 1
         if hits:
             self.vel.y = -PLAYER_JUMP
-
-
-
 
 
     def update(self):
@@ -241,16 +273,10 @@ class Coin(pg.sprite.Sprite):
         self.rect.y = y
 
 g = Game()
-# g.show_start_screen()
-
-    
-
+g.start_screen()
+g.instructions_screen()
 
 while g.running:  
     g.new()
-    # g.show_go_screen()
-    
-
-
 
 pg.quit()
