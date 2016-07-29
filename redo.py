@@ -217,9 +217,9 @@ class Game:
 
         text = font_renderer.render(
             "SCORE: "+ str(self.score), True, BLACK)
-        
 
-        bgimg.blit(
+
+        screen.blit(
             text,  # The text to render
             (10,10))  # Where on the destination surface to render said font
         # *after* drawing everything, flip the display
