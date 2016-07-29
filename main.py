@@ -83,13 +83,13 @@ class Game():
 
 #     def moveLeft(self, x_change):
 #         self.x_position += x_change
-
+)
+#         screen.blit(sprite1, (self.x_position, self.y_position))
+#        # pygame.draw.rect(screen, self.color, [0, 0, self.wi
 
 #     def drawSprite(self):
 #         sprite1 = pygame.image.load("images/girl.png").convert_alpha()
-#         sprite1 = pygame.transform.scale(sprite1, (100, 100))
-#         screen.blit(sprite1, (self.x_position, self.y_position))
-#        # pygame.draw.rect(screen, self.color, [0, 0, self.width, self.height])
+#         sprite1 = pygame.transform.scale(sprite1, (100, 100)dth, self.height])
 
 
 
