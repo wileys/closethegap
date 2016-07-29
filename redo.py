@@ -1,7 +1,6 @@
 import pygame as pg
 import random
 
-score = 0
 
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
@@ -12,6 +11,7 @@ GREY = (127, 127, 127)
 YELLOW = (255, 255, 0)
 GOLD = (255, 215, 0)
 GREY = (105, 105, 105)
+
 
 FPS = 60
 
@@ -53,6 +53,7 @@ class Game:
         self.clock = pg.time.Clock()
         self.running = True
         self.score = 0
+        self.level_number = 1
 
     def new(self):
         # start a new game
@@ -61,19 +62,7 @@ class Game:
         self.player = Player(self)
         self.all_sprites.add(self.player)
 
-        if level_number == 1:
-            p2 = Platform(370, 300, 150, 20)
-            p3 = Platform(595, 425, 150, 20)
-            p4 = Platform(145, 425, 150, 20)
-            p5 = Platform(0, 500, 50, 100)
-            self.all_sprites.add(p2)
-            self.platforms.add(p2)
-            self.all_sprites.add(p3)
-            self.platforms.add(p3)
-            self.all_sprites.add(p4)
-            self.platforms.add(p4)
-            self.all_sprites.add(p5)
-            self.platforms.add(p5)
+        if self.level_number == 1:
             p2 = Platform(370, 300, 150, 20)
             p3 = Platform(595, 425, 110, 20)
             p4 = Platform(145, 425, 150, 20)
@@ -120,8 +109,8 @@ class Game:
             self.coins.add(c9)
             self.all_sprites.add(c10)
             self.coins.add(c10)
-            
-        if level_number == 2:
+
+        if self.level_number == 2:
             p2 = Platform(370, 300, 20, 20)
             p3 = Platform(595, 425, 20, 20)
             p4 = Platform(145, 425, 20, 20)
@@ -134,6 +123,37 @@ class Game:
             self.platforms.add(p4)
             self.all_sprites.add(p5)
             self.platforms.add(p5)
+            self.coins = pg.sprite.Group()
+            c1 = Coin(390,270)
+            c2 = Coin(470, 270)
+            c3 = Coin(250, 390)
+            c4 = Coin(290, 320)
+            c5 = Coin(170, 390)
+            c6 = Coin(600, 390)
+            c7 = Coin(680, 390)
+            c8 = Coin(80, 425)
+            c9 = Coin(560, 320)
+            c10 = Coin(765, 470)
+            self.all_sprites.add(c1)
+            self.coins.add(c1)
+            self.all_sprites.add(c2)
+            self.coins.add(c2)
+            self.all_sprites.add(c3)
+            self.coins.add(c3)
+            self.all_sprites.add(c4)
+            self.coins.add(c4)
+            self.all_sprites.add(c5)
+            self.coins.add(c5)
+            self.all_sprites.add(c6)
+            self.coins.add(c6)
+            self.all_sprites.add(c7)
+            self.coins.add(c7)
+            self.all_sprites.add(c8)
+            self.coins.add(c8)
+            self.all_sprites.add(c9)
+            self.coins.add(c9)
+            self.all_sprites.add(c10)
+            self.coins.add(c10)
 
         self.run()
 
@@ -165,6 +185,13 @@ class Game:
         if self.player.rect.bottom > HEIGHT:
             self.playing = False 
             pg.time.delay(100)
+            self.score = 0
+
+        if self.level_number == 1:
+            if self.score == 100:
+                self.level_number = 2
+
+
 
         
 
@@ -187,16 +214,19 @@ class Game:
         # Game Loop - draw
         screen.blit(bgimg, [0,0])
         self.all_sprites.draw(self.screen)
+
         text = font_renderer.render(
-            "SCORE: "+ str(self.score),   # The font to render
-            1,             # With anti aliasing
-            (0,0,0)) # RGB Color
+            "SCORE: "+ str(self.score), True, BLACK)
+        
 
         bgimg.blit(
             text,  # The text to render
             (10,10))  # Where on the destination surface to render said font
         # *after* drawing everything, flip the display
+
         pg.display.flip()
+
+
 
     def show_start_screen(self):
         # game splash/start screen
@@ -269,6 +299,7 @@ class Coin(pg.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
 
+
 g = Game()
 # g.show_start_screen()
 
@@ -276,10 +307,11 @@ g = Game()
 
 
 while g.running:  
-    level_number = 2
     g.new()
+    screen.blit(bgimg, [0,0])
+    pg.display.flip()
     # g.show_go_screen()
-    
+
 
 
 
