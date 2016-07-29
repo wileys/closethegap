@@ -152,6 +152,55 @@ class Game:
             self.coins.add(c10)
 
         if self.level_number == 3:
+            p2 = Platform(370, 300, 150, 20)
+            p3 = Platform(595, 425, 110, 20)
+            p4 = Platform(145, 425, 150, 20)
+            p5 = Platform(0, 500, 50, 100)
+            p6 = Platform(750, 500, 50, 100)
+            self.all_sprites.add(p2)
+            self.platforms.add(p2)
+            self.all_sprites.add(p3)
+            self.platforms.add(p3)
+            self.all_sprites.add(p4)
+            self.platforms.add(p4)
+            self.all_sprites.add(p5)
+            self.platforms.add(p5)
+            self.all_sprites.add(p6)
+            self.platforms.add(p6)
+            self.coins = pg.sprite.Group()
+            c1 = Coin(390,270)
+            c2 = Coin(470, 270)
+            c3 = Coin(250, 390)
+            c4 = Coin(290, 320)
+            c5 = Coin(170, 390)
+            c6 = Coin(600, 390)
+            c7 = Coin(680, 390)
+            c8 = Coin(80, 425)
+            c9 = Coin(560, 320)
+            c10 = Coin(765, 470)
+            self.all_sprites.add(c1)
+            self.coins.add(c1)
+            self.all_sprites.add(c2)
+            self.coins.add(c2)
+            self.all_sprites.add(c3)
+            self.coins.add(c3)
+            self.all_sprites.add(c4)
+            self.coins.add(c4)
+            self.all_sprites.add(c5)
+            self.coins.add(c5)
+            self.all_sprites.add(c6)
+            self.coins.add(c6)
+            self.all_sprites.add(c7)
+            self.coins.add(c7)
+            self.all_sprites.add(c8)
+            self.coins.add(c8)
+            self.all_sprites.add(c9)
+            self.coins.add(c9)
+            self.all_sprites.add(c10)
+            self.coins.add(c10)
+
+
+        if self.level_number == 4:
             p2 = Platform(370, 300, 20, 20)
             p3 = Platform(595, 425, 20, 20)
             p4 = Platform(145, 425, 20, 20)
@@ -196,6 +245,8 @@ class Game:
             self.all_sprites.add(c10)
             self.coins.add(c10)
 
+        
+
 
         #white_male_platform = Platform(70, 800, 730, 20)
         self.run()
@@ -236,6 +287,10 @@ class Game:
         
         elif self.level_number == 2 and self.score == 100:
                 self.level_number = 3
+                self.score = 0
+
+        elif self.level_number == 3 and self.score == 100:
+                self.level_number = 4
                 self.score = 0
 
         
