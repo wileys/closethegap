@@ -131,8 +131,10 @@ class Game:
 
     def start_screen(self):
         self.screen.fill(WHITE)
-        self.draw_text(TITLE, 75, BLACK, WIDTH/2, HEIGHT/4)
-        self.draw_text("Press any key to start game.", 45, BLACK, WIDTH/2, HEIGHT/2)
+        self.draw_text(TITLE, 75, BLACK, WIDTH/2,125)
+        self.draw_text("Use left and right arrows keys to move forward and back.", 30, BLACK, WIDTH/2, 400)
+        self.draw_text("Use up arrow key to jump.", 30, BLACK, WIDTH/2, 450)
+        self.draw_text("Press any key to start!", 30, BLACK, WIDTH/2, HEIGHT/2)
         pg.display.flip()
         self.wait_for_key()
 
