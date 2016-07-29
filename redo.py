@@ -63,8 +63,47 @@ class Game:
         self.player = Player(self)
         self.all_sprites.add(self.player)
 
-
         if self.level_number == 1:
+            p5 = Platform(0, 500, 50, 100)
+            p2 = Platform(50, 550, 800, 50)
+            self.all_sprites.add(p5)
+            self.platforms.add(p5)
+            self.all_sprites.add(p2)
+            self.platforms.add(p2)
+            self.coins = pg.sprite.Group()
+            c1 = Coin(120,520)
+            c2 = Coin(190, 520)
+            c3 = Coin(260, 520)
+            c4 = Coin(330, 520)
+            c5 = Coin(400, 520)
+            c6 = Coin(470, 520)
+            c7 = Coin(540, 520)
+            c8 = Coin(610, 520)
+            c9 = Coin(680, 520)
+            c10 = Coin(750, 520)
+            self.all_sprites.add(c1)
+            self.coins.add(c1)
+            self.all_sprites.add(c2)
+            self.coins.add(c2)
+            self.all_sprites.add(c3)
+            self.coins.add(c3)
+            self.all_sprites.add(c4)
+            self.coins.add(c4)
+            self.all_sprites.add(c5)
+            self.coins.add(c5)
+            self.all_sprites.add(c6)
+            self.coins.add(c6)
+            self.all_sprites.add(c7)
+            self.coins.add(c7)
+            self.all_sprites.add(c8)
+            self.coins.add(c8)
+            self.all_sprites.add(c9)
+            self.coins.add(c9)
+            self.all_sprites.add(c10)
+            self.coins.add(c10)
+
+        
+        if self.level_number == 2:
             p2 = Platform(370, 300, 150, 20)
             p3 = Platform(595, 425, 110, 20)
             p4 = Platform(145, 425, 150, 20)
@@ -112,7 +151,7 @@ class Game:
             self.all_sprites.add(c10)
             self.coins.add(c10)
 
-        if self.level_number == 2:
+        if self.level_number == 3:
             p2 = Platform(370, 300, 20, 20)
             p3 = Platform(595, 425, 20, 20)
             p4 = Platform(145, 425, 20, 20)
@@ -157,8 +196,8 @@ class Game:
             self.all_sprites.add(c10)
             self.coins.add(c10)
 
+
         #white_male_platform = Platform(70, 800, 730, 20)
-    
         self.run()
 
     def run(self):
@@ -191,10 +230,15 @@ class Game:
             pg.time.delay(100)
             self.score = 0
 
-        if self.level_number == 1:
-            if self.score == 100:
+        if self.level_number == 1 and self.score == 100:
                 self.level_number = 2
+                self.score = 0
+        
+        elif self.level_number == 2 and self.score == 100:
+                self.level_number = 3
+                self.score = 0
 
+        
 
 
         
