@@ -40,6 +40,8 @@ pg.font.init()
 default_font = pg.font.get_default_font()
 font_renderer = pg.font.Font(default_font, 30)
 
+space_KEY= pg.K_SPACE
+
 # To create a surface containing `Some Text`
 
 
@@ -275,21 +277,25 @@ class Game:
 
 
 
-        #game over
+        #levels
         if self.player.rect.bottom > HEIGHT:
             self.playing = False 
             pg.time.delay(100)
             self.score = 0
 
         if self.level_number == 1 and self.score == 100:
+                g.level_1_stats()
+                # pg.time.delay(5000)
                 self.level_number = 2
                 self.score = 0
         
         elif self.level_number == 2 and self.score == 100:
+                g.level_2_stats()
                 self.level_number = 3
                 self.score = 0
 
         elif self.level_number == 3 and self.score == 100:
+                g.level_3_stats()
                 self.level_number = 4
                 self.score = 0
 
@@ -330,6 +336,8 @@ class Game:
     def show_start_screen(self):
         # game splash/start screen
         pass
+    #def show_instructions_screen(self):
+        #pass
 
 
     def draw_text(self, text, size, color, x, y):
@@ -347,13 +355,25 @@ class Game:
                 if event.type == pg.QUIT:
                     waiting = False
                     self.running = False
-                if event.type == pg.KEYUP:
+                if event.type == pg.KEYUP and event.key == pg.K_SPACE:
                     waiting = False
+
+    # def wait_for_K_SPACE(self):
+    #     waiting = True
+    #     while waiting:
+    #         self.clock.tick(30)
+
+    #         for event in pg.event.get():
+    #             if event.type == pg.QUIT:
+    #                 waiting = False
+    #                 self.running = False
+    #             if event.type == pg.KEYDOWN and event.key == pg.K_SPACE:
+    #                 waiting = False
 
     def start_screen(self):
         self.screen.fill(WHITE)
         self.draw_text(TITLE, 75, BLACK, WIDTH/2, 200)
-        self.draw_text("Press any key to start.", 40 , BLACK, WIDTH/2, 350)
+        self.draw_text("Press the space key to start.", 40 , BLACK, WIDTH/2, 350)
         pg.display.flip()
         self.wait_for_key()
 
@@ -363,12 +383,53 @@ class Game:
         self.draw_text("USE LEFT AND RIGHT ARROW KEYS TO MOVE FORWARD AND BACK. ", 24, BLACK, WIDTH/2, 250)
         self.draw_text("USE UP ARROW KEY TO JUMP", 24, BLACK, WIDTH/2, 300)
         self.draw_text("COLLECT ALL OF THE COINS TO MOVE TO THE NEXT LEVEL AND CLOSE THE GAP!", 24, BLACK, WIDTH/2, 350)
-        self.draw_text("Press any key to start.", 24, BLACK, WIDTH/2, 450)
+        self.draw_text("Press the space key to start.", 24, BLACK, WIDTH/2, 450)
         pg.display.flip()
         self.wait_for_key()
 
+    def level_1_stats(self):
+        self.screen.fill(WHITE)
+        self.draw_text("CONGRATULATIONS!", 30, BLACK, WIDTH/2, 150)
+        self.draw_text("You have completed Level 1!. ", 24, BLACK, WIDTH/2, 250)
+        self.draw_text("This level simulates climbing the ladder of success as a white male", 24, BLACK, WIDTH/2, 300)
+        self.draw_text("Did you notice the lack of obstacles the man faced?", 24, BLACK, WIDTH/2, 350)
+        self.draw_text("Press the space key to go to the next level.", 24, BLACK, WIDTH/2, 450)
+        pg.display.flip()
+        self.wait_for_key()
+        
 
+    def level_2_stats(self):
+        self.screen.fill(WHITE)
+        self.draw_text("CONGRATULATIONS!", 30, BLACK, WIDTH/2, 150)
+        self.draw_text("You have completed Level 2!", 24, BLACK, WIDTH/2, 250)
+        self.draw_text("This level simulates climbing the ladder of success as an Asian American woman", 24, BLACK, WIDTH/2, 300)
+        self.draw_text("Did you notice how the money was harder to get and there were gaps between the platforms?", 24, BLACK, WIDTH/2, 350)
+        self.draw_text("Asian American women generally make 90 cents to the white man's dollar.", 24,BLACK,WIDTH/2,400)
+        self.draw_text("Press the space key to go to the next level.", 24, BLACK, WIDTH/2, 450)
+        pg.display.flip()
+        self.wait_for_key()
 
+    def level_3_stats(self):
+        self.screen.fill(WHITE)
+        self.draw_text("CONGRATULATIONS!", 30, BLACK, WIDTH/2, 150)
+        self.draw_text("You have completed Level 3!. ", 24, BLACK, WIDTH/2, 250)
+        self.draw_text("This level simulates climbing the ladder of success as a white woman", 24, BLACK, WIDTH/2, 300)
+        self.draw_text("Did you notice the money was harder to get?", 24, BLACK, WIDTH/2, 350)
+        self.draw_text("White women generally make 78 cents to the white man's dollar.",24,BLACK,WIDTH/2,400)
+        self.draw_text("Press the space key to go to the next level.", 24, BLACK, WIDTH/2, 450)
+        pg.display.flip()
+        self.wait_for_key()
+
+    def level_4_stats(self):
+        self.screen.fill(WHITE)
+        self.draw_text("CONGRATULATIONS!", 30, BLACK, WIDTH/2, 150)
+        self.draw_text("You have completed Level 4!. ", 24, BLACK, WIDTH/2, 250)
+        self.draw_text("This level simulates climbing the ladder of success as an African American woman", 24, BLACK, WIDTH/2, 300)
+        self.draw_text("Did you notice how the gaps became bigger?", 24, BLACK, WIDTH/2, 350)
+        self.draw_text("African American women generally make 64 cents to the white man's dollar.",24,BLACK,WIDTH/2,400)
+        self.draw_text("Press the space key to go to the next level.", 24, BLACK, WIDTH/2, 450)
+        pg.display.flip()
+        self.wait_for_key()
 
 
     # def go_screen():
@@ -436,6 +497,7 @@ class Coin(pg.sprite.Sprite):
 g = Game()
 g.start_screen()
 g.instructions_screen()
+
 
 while g.running:  
     g.new()
