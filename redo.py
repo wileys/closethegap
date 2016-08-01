@@ -153,7 +153,7 @@ class Game:
             self.all_sprites.add(c10)
             self.coins.add(c10)
 
-        if self.level_number == 3:
+        if self.level_number == 4:
             p2 = Platform(370, 300, 150, 20)
             p3 = Platform(595, 425, 110, 20)
             p4 = Platform(145, 425, 150, 20)
@@ -202,11 +202,13 @@ class Game:
             self.coins.add(c10)
 
 
-        if self.level_number == 4:
-            p2 = Platform(370, 300, 20, 20)
-            p3 = Platform(595, 425, 20, 20)
-            p4 = Platform(145, 425, 20, 20)
-            p5 = Platform(0, 500, 50, 100)
+        if self.level_number == 3:
+            p4 = Platform(300, 300, 80, 20)#3rd platform
+            p5 = Platform(400, 425, 80, 20)#2nd platform 
+            p3 = Platform(120, 425, 80, 20) #1st platform 
+            p2 = Platform(0, 500, 50, 100) #end
+            p6 = Platform(750,500,50,100) #end
+            p7 = Platform(625,500,80,20)#4th platform
             self.all_sprites.add(p2)
             self.platforms.add(p2)
             self.all_sprites.add(p3)
@@ -215,17 +217,21 @@ class Game:
             self.platforms.add(p4)
             self.all_sprites.add(p5)
             self.platforms.add(p5)
+            self.all_sprites.add(p6)
+            self.platforms.add(p6)
+            self.all_sprites.add(p7)
+            self.platforms.add(p7)
             self.coins = pg.sprite.Group()
-            c1 = Coin(390,270)
-            c2 = Coin(470, 270)
-            c3 = Coin(250, 390)
-            c4 = Coin(290, 320)
-            c5 = Coin(170, 390)
-            c6 = Coin(600, 390)
-            c7 = Coin(680, 390)
-            c8 = Coin(80, 425)
-            c9 = Coin(560, 320)
-            c10 = Coin(765, 470)
+            c1 = Coin(300,260) #2nd platform
+            c2 = Coin(350, 260)#2nd platform
+            c3 = Coin(125, 385)#1st platform
+            c4 = Coin(170, 385)#1 and 2
+            c5 = Coin(400, 390)#3rd
+            c6 = Coin(450, 390)#3rd
+            c7 = Coin(625, 450)
+            c8 = Coin(650, 400)
+            c9 = Coin(675, 450)
+            c10 = Coin(775, 450)
             self.all_sprites.add(c1)
             self.coins.add(c1)
             self.all_sprites.add(c2)
