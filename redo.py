@@ -33,7 +33,7 @@ pg.display.set_caption("CLOSE THE GAP")
 FONT_NAME = 'arial'
 vec = pg.math.Vector2
 
-bgimg = pg.image.load("images/pixelpaper.jpg").convert()
+bgimg = pg.image.load("images/bgimg.png").convert()
 bgimg = pg.transform.scale(bgimg, (800, 600))
 
 definition = pg.image.load("images/definition.png").convert_alpha()
@@ -440,6 +440,10 @@ class Game:
             self.coins.add(c10)
 
         
+        if self.level_number == 8:
+            p1 = Platform(0, 500, 800, 70)
+            self.all_sprites.add(p1)
+            self.platforms.add(p1)
 
 
         #white_male_platform = Platform(70, 800, 730, 20)
@@ -506,6 +510,12 @@ class Game:
                 self.level_number = 7
                 self.score = 0
 
+        elif self.level_number == 7 and self.score == 100:
+                g.level_3_stats()
+                self.level_number = 8
+                self.score = 0
+
+
 
 
         
@@ -537,9 +547,9 @@ class Game:
             for snowflake in snow_list: 
                 snowflake.draw()
                 snowflake.fall(3)
-            screen.blit(congratz, (100, HEIGHT/4))
-            screen.blit(definition, (100, HEIGHT-200))
-            self.draw_text("You have broken the glass ceiling!! </sexism>", 30, BLACK, WIDTH/2, HEIGHT/4 +150)
+            screen.blit(congratz, (0, 70))
+            screen.blit(definition, (100, 300))
+            self.draw_text("You have broken the glass ceiling!! </sexism>", 30, BLACK, WIDTH/2, HEIGHT/4 +50)
 
         screen.blit(
             text,  # The text to render
@@ -666,6 +676,12 @@ class Player(pg.sprite.Sprite):
             sprite = pg.image.load("images/girl4.png").convert_alpha()
         if g.level_number ==5:
             sprite = pg.image.load("images/girl5.png").convert_alpha()
+        if g.level_number ==6:
+            sprite = pg.image.load("images/girl6.png").convert_alpha()
+        if g.level_number ==7:
+            sprite = pg.image.load("images/girl7.png").convert_alpha()
+        if g.level_number ==8:
+            sprite = pg.image.load("images/girl8.png").convert_alpha()
         sprite = pg.transform.scale(sprite, (70, 70))
 
         self.image.set_colorkey((0,0,0))
