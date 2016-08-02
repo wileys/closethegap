@@ -33,8 +33,12 @@ pg.display.set_caption("CLOSE THE GAP")
 FONT_NAME = 'arial'
 vec = pg.math.Vector2
 
-bgimg = pg.image.load("images/pixelpaper.jpg").convert()
+bgimg = pg.image.load("images/bgimg.png").convert()
 bgimg = pg.transform.scale(bgimg, (800, 600))
+
+definition = pg.image.load("images/definition.png").convert_alpha()
+congratz = pg.image.load("images/congratz.png").convert_alpha()
+
 
 pg.font.init()
 default_font = pg.font.get_default_font()
@@ -43,6 +47,18 @@ font_renderer = pg.font.Font(default_font, 30)
 space_KEY= pg.K_SPACE
 
 # To create a surface containing `Some Text`
+
+class SnowFlake():
+    def __init__(self, x_pos, y_pos):
+        self.x_pos = x_pos
+        self.y_pos = y_pos 
+
+    def fall(self, speed):
+        self.y_pos += speed
+
+    def draw(self):
+        pg.draw.rect(screen, WHITE, (self.x_pos, self.y_pos, 5, 5), 1)
+
 
 
 class Game:
@@ -153,6 +169,60 @@ class Game:
             self.all_sprites.add(c10)
             self.coins.add(c10)
 
+
+        if self.level_number == 3:
+            p4 = Platform(300, 300, 80, 20)#3rd platform
+            p5 = Platform(400, 425, 80, 20)#2nd platform 
+            p3 = Platform(120, 425, 80, 20) #1st platform 
+            p2 = Platform(0, 500, 50, 100) #end
+            p6 = Platform(750,500,50,100) #end
+            p7 = Platform(625,500,80,20)#4th platform
+            self.all_sprites.add(p2)
+            self.platforms.add(p2)
+            self.all_sprites.add(p3)
+            self.platforms.add(p3)
+            self.all_sprites.add(p4)
+            self.platforms.add(p4)
+            self.all_sprites.add(p5)
+            self.platforms.add(p5)
+            self.all_sprites.add(p6)
+            self.platforms.add(p6)
+            self.all_sprites.add(p7)
+            self.platforms.add(p7)
+            self.coins = pg.sprite.Group()
+            c1 = Coin(300,260) #2nd platform
+            c2 = Coin(380, 260)#2nd platform
+            c3 = Coin(125, 385)#1st platform
+            c4 = Coin(190, 385)#1 and 2
+            c5 = Coin(400, 390)#3rd
+            c6 = Coin(480, 390)#3rd
+            c7 = Coin(625, 450)
+            c8 = Coin(650, 400)
+            c9 = Coin(675, 450)
+            c10 = Coin(775, 450)
+            self.all_sprites.add(c1)
+            self.coins.add(c1)
+            self.all_sprites.add(c2)
+            self.coins.add(c2)
+            self.all_sprites.add(c3)
+            self.coins.add(c3)
+            self.all_sprites.add(c4)
+            self.coins.add(c4)
+            self.all_sprites.add(c5)
+            self.coins.add(c5)
+            self.all_sprites.add(c6)
+            self.coins.add(c6)
+            self.all_sprites.add(c7)
+            self.coins.add(c7)
+            self.all_sprites.add(c8)
+            self.coins.add(c8)
+            self.all_sprites.add(c9)
+            self.coins.add(c9)
+            self.all_sprites.add(c10)
+            self.coins.add(c10)
+
+
+
         if self.level_number == 4:
             p2 = Platform(265, 320, 80, 20)
             p3 = Platform(440, 175, 100, 20)
@@ -210,6 +280,7 @@ class Game:
             self.all_sprites.add(c10)
             self.coins.add(c10)
 
+
         if self.level_number == 5:
             p2 = Platform(150, 510, 30, 20)
             p3 = Platform(450, 345, 70, 20)
@@ -265,6 +336,8 @@ class Game:
             self.coins.add(c10)
 
 
+       
+
         if self.level_number == 6:
             p2 = Platform(350, 300, 30, 20)
             p3 = Platform(575, 425, 50, 20)
@@ -292,7 +365,6 @@ class Game:
             c8 = Coin(80, 425)
             c9 = Coin(560, 320)
             c10 = Coin(765, 300)
-
             self.all_sprites.add(c1)
             self.coins.add(c1)
             self.all_sprites.add(c2)
@@ -315,7 +387,7 @@ class Game:
             self.coins.add(c10)
 
 
-
+        
         if self.level_number == 7:
             p2 = Platform(370, 300, 70, 20)
             p3 = Platform(575, 305, 50, 20)
@@ -368,6 +440,10 @@ class Game:
             self.coins.add(c10)
 
         
+        if self.level_number == 8:
+            p1 = Platform(0, 500, 800, 70)
+            self.all_sprites.add(p1)
+            self.platforms.add(p1)
 
 
         #white_male_platform = Platform(70, 800, 730, 20)
@@ -425,15 +501,21 @@ class Game:
                 self.score = 0
 
         elif self.level_number == 5 and self.score == 100:
-                        g.level_3_stats()
-                        self.level_number = 6
-                        self.score = 0
-        
+                g.level_3_stats()
+                self.level_number = 6
+                self.score = 0
+
         elif self.level_number == 6 and self.score == 100:
-                        g.level_3_stats()
-                        self.level_number = 7
-                        self.score = 0
-        
+                g.level_3_stats()
+                self.level_number = 7
+                self.score = 0
+
+        elif self.level_number == 7 and self.score == 100:
+                g.level_3_stats()
+                self.level_number = 8
+                self.score = 0
+
+
 
 
         
@@ -458,6 +540,16 @@ class Game:
         text = font_renderer.render(
             "SCORE: "+ str(self.score), True, BLACK)
 
+        if g.level_number == 8:
+            x = random.randint(0, 800)
+            y = 0
+            snow_list.append(SnowFlake(x, y))
+            for snowflake in snow_list: 
+                snowflake.draw()
+                snowflake.fall(3)
+            screen.blit(congratz, (0, 70))
+            screen.blit(definition, (100, 300))
+            self.draw_text("You have broken the glass ceiling!! </sexism>", 30, BLACK, WIDTH/2, HEIGHT/4 +50)
 
         screen.blit(
             text,  # The text to render
@@ -574,8 +666,24 @@ class Player(pg.sprite.Sprite):
         pg.sprite.Sprite.__init__(self)
         self.game = game
         self.image = pg.Surface((70, 70))
-        sprite = pg.image.load("images/girl.png").convert_alpha()
+        if g.level_number ==1:
+            sprite = pg.image.load("images/girl.png").convert_alpha()
+        if g.level_number ==2:
+            sprite = pg.image.load("images/girl2.png").convert_alpha()
+        if g.level_number ==3:
+            sprite = pg.image.load("images/girl3.png").convert_alpha()
+        if g.level_number ==4:
+            sprite = pg.image.load("images/girl4.png").convert_alpha()
+        if g.level_number ==5:
+            sprite = pg.image.load("images/girl5.png").convert_alpha()
+        if g.level_number ==6:
+            sprite = pg.image.load("images/girl6.png").convert_alpha()
+        if g.level_number ==7:
+            sprite = pg.image.load("images/girl7.png").convert_alpha()
+        if g.level_number ==8:
+            sprite = pg.image.load("images/girl8.png").convert_alpha()
         sprite = pg.transform.scale(sprite, (70, 70))
+
         self.image.set_colorkey((0,0,0))
         self.image.blit(sprite, (0, 0))
         self.rect = self.image.get_rect()
@@ -631,6 +739,10 @@ class Coin(pg.sprite.Sprite):
 g = Game()
 g.start_screen()
 g.instructions_screen()
+speed = 3
+snow_list = []
+
+
 
 
 while g.running:  
