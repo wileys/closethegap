@@ -499,22 +499,22 @@ class Game:
                 self.score = 0
 
         elif self.level_number == 4 and self.score == 100:
-                g.level_3_stats()
+                g.level_4_stats()
                 self.level_number = 5
                 self.score = 0
 
         elif self.level_number == 5 and self.score == 100:
-                g.level_3_stats()
+                g.level_5_stats()
                 self.level_number = 6
                 self.score = 0
 
         elif self.level_number == 6 and self.score == 100:
-                g.level_3_stats()
+                g.level_6_stats()
                 self.level_number = 7
                 self.score = 0
 
         elif self.level_number == 7 and self.score == 100:
-                g.level_3_stats()
+                g.level_7_stats()
                 self.level_number = 8
                 self.score = 0
 
@@ -618,8 +618,8 @@ class Game:
     def level_1_stats(self):
         self.screen.fill(WHITE)
         self.draw_text("CONGRATULATIONS!", 30, BLACK, WIDTH/2, 150)
-        self.draw_text("You have completed Level 1!. ", 24, BLACK, WIDTH/2, 250)
-        self.draw_text("This level simulates climbing the ladder of success as a white male", 24, BLACK, WIDTH/2, 300)
+        self.draw_text("You have completed Level 1! ", 24, BLACK, WIDTH/2, 250)
+        self.draw_text("This level simulates climbing the ladder of success as a white male.", 24, BLACK, WIDTH/2, 300)
         self.draw_text("Did you notice the lack of obstacles the man faced?", 24, BLACK, WIDTH/2, 350)
         self.draw_text("Press the space key to go to the next level.", 24, BLACK, WIDTH/2, 450)
         pg.display.flip()
@@ -630,7 +630,7 @@ class Game:
         self.screen.fill(WHITE)
         self.draw_text("CONGRATULATIONS!", 30, BLACK, WIDTH/2, 150)
         self.draw_text("You have completed Level 2!", 24, BLACK, WIDTH/2, 250)
-        self.draw_text("This level simulates climbing the ladder of success as an Asian American woman", 22, BLACK, WIDTH/2, 300)
+        self.draw_text("This level simulates climbing the ladder of success as an Asian American woman.", 22, BLACK, WIDTH/2, 300)
         self.draw_text("Did you notice how the money was harder to get and there were gaps between the platforms?", 22, BLACK, WIDTH/2, 350)
         self.draw_text("Asian American women generally make 90 cents to the white man's dollar.", 22,BLACK,WIDTH/2,400)
         self.draw_text("Press the space key to go to the next level.", 22, BLACK, WIDTH/2, 450)
@@ -641,8 +641,8 @@ class Game:
         self.screen.fill(WHITE)
         self.draw_text("CONGRATULATIONS!", 30, BLACK, WIDTH/2, 150)
         self.draw_text("You have completed Level 3! ", 24, BLACK, WIDTH/2, 250)
-        self.draw_text("This level simulates climbing the ladder of success as a white woman", 24, BLACK, WIDTH/2, 300)
-        self.draw_text("Did you notice the money was harder to get?", 24, BLACK, WIDTH/2, 350)
+        self.draw_text("This level simulates climbing the ladder of success as a white woman.", 24, BLACK, WIDTH/2, 300)
+        self.draw_text("The wage gap got larger and therefore the level got harder.", 24, BLACK, WIDTH/2, 350)
         self.draw_text("White women generally make 78 cents to the white man's dollar.",24,BLACK,WIDTH/2,400)
         self.draw_text("Press the space key to go to the next level.", 24, BLACK, WIDTH/2, 450)
         pg.display.flip()
@@ -651,13 +651,47 @@ class Game:
     def level_4_stats(self):
         self.screen.fill(WHITE)
         self.draw_text("CONGRATULATIONS!", 30, BLACK, WIDTH/2, 150)
-        self.draw_text("You have completed Level 4!. ", 24, BLACK, WIDTH/2, 250)
-        self.draw_text("This level simulates climbing the ladder of success as an African American woman", 24, BLACK, WIDTH/2, 300)
-        self.draw_text("Did you notice how the gaps became bigger?", 24, BLACK, WIDTH/2, 350)
+        self.draw_text("You have completed Level 4! ", 24, BLACK, WIDTH/2, 250)
+        self.draw_text("This level simulates climbing the ladder of success as a Native Hawaiian or Pacific Islander woman.", 22, BLACK, WIDTH/2, 300)
+        self.draw_text("The wage gap got larger and therefore the level got harder.", 22, BLACK, WIDTH/2, 350)
+        self.draw_text("Native Hawaiian or Pacific Islander women generally make 65 cents to the white man's dollar.",22,BLACK,WIDTH/2,400)
+        self.draw_text("Press the space key to go to the next level.", 22, BLACK, WIDTH/2, 450)
+        pg.display.flip()
+        self.wait_for_key()
+
+    def level_5_stats(self):
+        self.screen.fill(WHITE)
+        self.draw_text("CONGRATULATIONS!", 30, BLACK, WIDTH/2, 150)
+        self.draw_text("You have completed Level 5! ", 24, BLACK, WIDTH/2, 250)
+        self.draw_text("This level simulates climbing the ladder of success as an African American woman.", 24, BLACK, WIDTH/2, 300)
+        self.draw_text("The wage gap got larger and therefore the level got harder.", 24, BLACK, WIDTH/2, 350)
         self.draw_text("African American women generally make 64 cents to the white man's dollar.",24,BLACK,WIDTH/2,400)
         self.draw_text("Press the space key to go to the next level.", 24, BLACK, WIDTH/2, 450)
         pg.display.flip()
         self.wait_for_key()
+
+    def level_6_stats(self):
+        self.screen.fill(WHITE)
+        self.draw_text("CONGRATULATIONS!", 30, BLACK, WIDTH/2, 150)
+        self.draw_text("You have completed Level 6! ", 22, BLACK, WIDTH/2, 250)
+        self.draw_text("This level simulates climbing the ladder of success as an American Indian or Alaskan Native woman.", 22, BLACK, WIDTH/2, 300)
+        self.draw_text("The wage gap got larger and therefore the level got harder.", 22, BLACK, WIDTH/2, 350)
+        self.draw_text("American Indian or Alaskan Native women generally make 59 cents to the white man's dollar.",22,BLACK,WIDTH/2,400)
+        self.draw_text("Press the space key to go to the next level.", 22, BLACK, WIDTH/2, 450)
+        pg.display.flip()
+        self.wait_for_key()
+
+    def level_7_stats(self):
+        self.screen.fill(WHITE)
+        self.draw_text("CONGRATULATIONS!", 30, BLACK, WIDTH/2, 150)
+        self.draw_text("You have completed Level 7! ", 24, BLACK, WIDTH/2, 250)
+        self.draw_text("This level simulates climbing the ladder of success as a Latina woman.", 24, BLACK, WIDTH/2, 300)
+        self.draw_text("The wage gap got larger and therefore the level got harder.", 24, BLACK, WIDTH/2, 350)
+        self.draw_text("Latina women generally make 54 cents to the white man's dollar.",24,BLACK,WIDTH/2,400)
+        self.draw_text("Press the space key to go to the next level.", 24, BLACK, WIDTH/2, 450)
+        pg.display.flip()
+        self.wait_for_key()
+
 
 
     # def go_screen():
@@ -723,6 +757,7 @@ class Platform(pg.sprite.Sprite):
         pg.sprite.Sprite.__init__(self)
         self.image = pg.Surface((w, h))
         self.image.fill(MAROON)
+        self.image.fill((23, 26, 41))
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
