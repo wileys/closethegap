@@ -138,11 +138,11 @@ class Game:
             self.all_sprites.add(p6)
             self.platforms.add(p6)
             self.coins = pg.sprite.Group()
-            c1 = Coin(390,250)
+            c1 = Coin(390,270)
             c2 = Coin(470, 270)
             c3 = Coin(250, 390)
             c4 = Coin(290, 320)
-            c5 = Coin(170, 390)
+            c5 = Coin(170, 390)#1
             c6 = Coin(600, 390)
             c7 = Coin(680, 390)
             c8 = Coin(80, 425)
@@ -171,12 +171,12 @@ class Game:
 
 
         if self.level_number == 3:
-            p4 = Platform(300, 300, 80, 20)#3rd platform
-            p5 = Platform(400, 425, 80, 20)#2nd platform 
-            p3 = Platform(120, 425, 80, 20) #1st platform 
-            p2 = Platform(0, 500, 50, 100) #end
-            p6 = Platform(750,500,50,100) #end
-            p7 = Platform(625,500,80,20)#4th platform
+            p4 = Platform(260, 300, 80, 20)#3rd platform
+            p5 = Platform(400, 425, 80, 20)#4th platform 
+            p3 = Platform(120, 425, 80, 20) #2nd platform 
+            p2 = Platform(0, 500, 50, 100) #1st
+            p6 = Platform(750,500,50,100) #6th
+            p7 = Platform(625,500,80,20)#5th platform
             self.all_sprites.add(p2)
             self.platforms.add(p2)
             self.all_sprites.add(p3)
@@ -190,16 +190,16 @@ class Game:
             self.all_sprites.add(p7)
             self.platforms.add(p7)
             self.coins = pg.sprite.Group()
-            c1 = Coin(300,260) #2nd platform
-            c2 = Coin(380, 260)#2nd platform
-            c3 = Coin(125, 385)#1st platform
-            c4 = Coin(190, 385)#1 and 2
-            c5 = Coin(400, 390)#3rd
-            c6 = Coin(480, 390)#3rd
-            c7 = Coin(625, 450)
-            c8 = Coin(650, 400)
-            c9 = Coin(675, 450)
-            c10 = Coin(775, 450)
+            c1 = Coin(290,260) #3rd 
+            c2 = Coin(395, 300)#4th
+            c3 = Coin(125, 385)#1st
+            c4 = Coin(200, 300)#2nd
+            c5 = Coin(415, 390)#5th
+            c6 = Coin(500, 350)#6th
+            c7 = Coin(625, 450)#7th
+            c8 = Coin(670, 400)#8th
+            c9 = Coin(175, 385)#9th
+            c10 = Coin(775, 450)#10th
             self.all_sprites.add(c1)
             self.coins.add(c1)
             self.all_sprites.add(c2)
@@ -249,16 +249,16 @@ class Game:
             self.all_sprites.add(p9)
             self.platforms.add(p9)
             self.coins = pg.sprite.Group()
-            c1 = Coin(295, 70)
-            c2 = Coin(475, 140)
-            c3 = Coin(210, 280)
-            c4 = Coin(155, 370)
-            c5 = Coin(360, 170)
-            c6 = Coin(620, 295)
-            c7 = Coin(645, 395)
-            c8 = Coin(55, 335)
-            c9 = Coin(565, 230)
-            c10 = Coin(765, 460)
+            c1 = Coin(290, 70)#4 upper coin
+            c2 = Coin(475, 140)#7
+            c3 = Coin(290, 280)#3
+            c4 = Coin(170, 370)#2
+            c5 = Coin(360, 170)#5
+            c6 = Coin(610, 295)#6
+            c7 = Coin(645, 395)#9
+            c8 = Coin(100,370)#1
+            c9 = Coin(565, 230)#8
+            c10 = Coin(765, 460)#10
             self.all_sprites.add(c1)
             self.coins.add(c1)
             self.all_sprites.add(c2)
@@ -355,14 +355,14 @@ class Game:
             self.all_sprites.add(p6)
             self.platforms.add(p6)
             self.coins = pg.sprite.Group()
-            c1 = Coin(390,270)
-            c2 = Coin(430, 250)
-            c3 = Coin(220, 300)
-            c4 = Coin(170, 250)
-            c5 = Coin(170, 300)
+            c1 = Coin(360,270)
+            c2 = Coin(400, 250)
+            c3 = Coin(190, 280)
+            c4 = Coin(190, 370)#3
+            c5 = Coin(775, 400)#10
             c6 = Coin(600, 390)
             c7 = Coin(680, 350)
-            c8 = Coin(80, 425)
+            c8 = Coin(80, 425)#1
             c9 = Coin(560, 320)
             c10 = Coin(765, 300)
             self.all_sprites.add(c1)
@@ -392,7 +392,7 @@ class Game:
             p2 = Platform(370, 300, 70, 20)
             p3 = Platform(575, 305, 50, 20)
             p4 = Platform(185, 425, 20, 20)
-            p7 = Platform(185, 280, 20, 20)
+            p7 = Platform(185, 250, 20, 20)
             p5 = Platform(0, 500, 50, 100)
             p6 = Platform(750, 500, 50, 100)
             self.all_sprites.add(p2)
@@ -408,16 +408,16 @@ class Game:
             self.all_sprites.add(p7)
             self.platforms.add(p7)
             self.coins = pg.sprite.Group()
-            c1 = Coin(390,270)
-            c2 = Coin(430, 220)
-            c3 = Coin(250, 390)
-            c4 = Coin(290, 260)
-            c5 = Coin(170, 390)
-            c6 = Coin(600, 250)
-            c7 = Coin(680, 290)
-            c8 = Coin(80, 425)
-            c9 = Coin(560, 300)
-            c10 = Coin(765, 360)
+            c1 = Coin(390,270)#4
+            c2 = Coin(430, 220)#5
+            c3 = Coin(180, 200)
+            c4 = Coin(290, 260)#3
+            c5 = Coin(180, 390)#2
+            c6 = Coin(775, 450)#7
+            c7 = Coin(680, 290)#8
+            c8 = Coin(80, 425)#1
+            c9 = Coin(560, 250)#6
+            c10 = Coin(765, 360)#9
             self.all_sprites.add(c1)
             self.coins.add(c1)
             self.all_sprites.add(c2)
@@ -540,6 +540,9 @@ class Game:
         text = font_renderer.render(
             "SCORE: "+ str(self.score), True, BLACK)
 
+        text2 = font_renderer.render(
+            "LEVEL: " + str(self.level_number), True, BLACK)
+
         if g.level_number == 8:
             x = random.randint(0, 800)
             y = 0
@@ -554,6 +557,11 @@ class Game:
         screen.blit(
             text,  # The text to render
             (10,10))  # Where on the destination surface to render said font
+        # *after* drawing everything, flip the display
+
+        screen.blit(
+            text2,  # The text to render
+            (10,50))  # Where on the destination surface to render said font
         # *after* drawing everything, flip the display
 
         pg.display.flip()
