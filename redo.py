@@ -30,7 +30,7 @@ TITLE = "CLOSE THE GAP"
 
 pg.display.set_caption("CLOSE THE GAP") 
 
-FONT_NAME = 'courier'
+FONT_NAME = 'arial'
 vec = pg.math.Vector2
 
 bgimg = pg.image.load("images/bgimg.png").convert()
@@ -540,6 +540,9 @@ class Game:
         text = font_renderer.render(
             "SCORE: "+ str(self.score), True, BLACK)
 
+        text2 = font_renderer.render(
+            "LEVEL: " + str(self.level_number), True, BLACK)
+
         if g.level_number == 8:
             x = random.randint(0, 800)
             y = 0
@@ -554,6 +557,11 @@ class Game:
         screen.blit(
             text,  # The text to render
             (10,10))  # Where on the destination surface to render said font
+        # *after* drawing everything, flip the display
+
+        screen.blit(
+            text2,  # The text to render
+            (10,50))  # Where on the destination surface to render said font
         # *after* drawing everything, flip the display
 
         pg.display.flip()
